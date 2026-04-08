@@ -16,14 +16,13 @@ void main() {
       continue;
     }
     bool shouldExit = handleCommand(repo, input);
-    if(shouldExit) {
+    if (shouldExit) {
       break;
     }
   }
 }
 
-bool handleCommand(repo, String input) {
-}
+bool handleCommand(repo, String input) {}
 
 void printMenu() {
   print('Приложение TODO');
@@ -33,5 +32,26 @@ void printMenu() {
   print(' done<id>   - отметить выполненной');
   print(' delete<id>   - удалить задачу');
   print(' exit   - выход');
+  print('');
+}
 
+void addCommand(TodoRepository repo, String input) {
+  if (input.length <= 4) {
+    print('Ошибка: введите текст');
+    return;
+  }
+  String title = input.substring(4).trim();
+  repo.add(title);
+  print('Задача добавлена');
+}
+
+void listCommand(TodoRepository repo) {
+  List<Todo> todos = repo.getAll();
+  if (todos.isEmpty) {
+    print('Список задач пуст');
+    return;
+  }
+  for (var todo in todos) {
+    print(todo);
+  }
 }
